@@ -1,0 +1,242 @@
+/* Общие стили для всего сайта в мрачных тонах */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #0f1115; /* Тёмно-серый глубокий фон */
+    color: #e2e8f0; /* Светло-серый текст для отличной читаемости */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Шапка сайта */
+header {
+    background: linear-gradient(135deg, #1b2230, #111622); /* Мрачный тёмно-голубой градиент */
+    color: #ffffff;
+    padding: 50px 0;
+    text-align: center;
+    border-bottom: 1px solid #2a364f;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+}
+
+header p {
+    color: #94a3b8;
+    margin-top: 10px;
+}
+
+nav {
+    margin-top: 25px;
+}
+
+nav a {
+    color: #93c5fd; /* Мягкий голубой цвет для ссылок меню */
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s, opacity 0.3s;
+}
+
+nav a:hover {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+/* Карточки (блоки контента) */
+.card {
+    background: #1b2230; /* Тёмно-голубые разделы сайта */
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    border: 1px solid #2a364f; /* Едва заметная рамка для объема */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+h2, h3 {
+    color: #ffffff;
+    margin-top: 0;
+}
+
+/* Раздел "Обо мне" */
+.about-content {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2a364f;
+}
+
+/* Даты и ссылки */
+.date {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+a {
+    color: #60a5fa; /* Красивый контрастный голубой для ссылок */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+/* Медиа-галерея */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.media-item {
+    background: #111622; /* Чуть более тёмный фон внутри карточек медиа */
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #2a364f;
+}
+
+.media-item img, .media-item video {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Теги и описания */
+.tags {
+    margin: 12px 0 8px 0;
+}
+
+.tag {
+    background: #1e293b;
+    color: #38bdf8;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    margin-right: 5px;
+    border: 1px solid #2a364f;
+}
+
+.media-desc {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin: 5px 0 0 0;
+}
+
+.audio-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #2a364f;
+}
+
+audio {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Списки */
+.lists-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.list-box ul {
+    padding-left: 20px;
+    color: #cbd5e1;
+}
+
+.list-box li {
+    margin-bottom: 8px;
+}
+
+/* ПОДВАЛ САЙТА (Стилизация по скриншоту) */
+footer {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #0b0c10; /* Почти чёрный низ для эффекта полного погружения */
+    border-top: 1px solid #1a2230;
+}
+
+.footer-quote {
+    color: #ffd700; /* Золотой / Желтый цвет цитаты как на скрине */
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.footer-copyright {
+    color: #576574; /* Приглушенный серый цвет */
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 50%; /* Круглые аккуратные кнопки */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Для инстаграма сделаем легкое скругление вместо полного круга, если хочешь точное соответствие */
+.footer-socials a:last-child {
+    border-radius: 35%; 
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+    color: #60a5fa;
+    border-color: #60a5fa;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 600px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    nav a {
+        display: block;
+        margin: 12px 0;
+    }
+    .footer-quote {
+        font-size: 1.1rem;
+    }
+}
