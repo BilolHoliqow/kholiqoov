@@ -20,6 +20,9 @@ header {
     padding: 20px 0;
     border-bottom: 1px solid #334155;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 {
@@ -33,16 +36,25 @@ header p {
     color: #94a3b8;
 }
 
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 nav a {
     color: #cbd5e1;
     text-decoration: none;
-    margin: 0 15px;
+    padding: 8px 15px;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 4px;
 }
 
 nav a:hover {
     color: #38bdf8;
+    background-color: rgba(56, 189, 248, 0.1);
 }
 
 /* Основные блоки-карточки */
@@ -67,6 +79,7 @@ nav a:hover {
     display: flex;
     align-items: center;
     gap: 25px;
+    flex-wrap: wrap;
 }
 
 .profile-img {
@@ -75,11 +88,13 @@ nav a:hover {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #38bdf8;
+    flex-shrink: 0;
 }
 
 .post-date {
     font-size: 0.85rem;
     color: #64748b;
+    margin: 0 0 10px 0;
 }
 
 /* Сетка для фото и видео */
@@ -95,9 +110,16 @@ nav a:hover {
     border-radius: 8px;
     padding: 15px;
     border: 1px solid #334155;
+    transition: transform 0.3s, border-color 0.3s;
 }
 
-.media-item img, .media-item video {
+.media-item:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+}
+
+.media-item img,
+.media-item video {
     width: 100%;
     border-radius: 6px;
     display: block;
@@ -105,9 +127,18 @@ nav a:hover {
     object-fit: cover;
 }
 
+.media-item p {
+    margin: 10px 0 0 0;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
 /* Хэштеги */
 .tags {
     margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .tag {
@@ -116,7 +147,7 @@ nav a:hover {
     padding: 3px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
-    margin-right: 5px;
+    display: inline-block;
 }
 
 /* Аудиоплеер */
@@ -128,14 +159,19 @@ nav a:hover {
     text-align: center;
 }
 
+.audio-box h3 {
+    margin: 0 0 15px 0;
+    color: #f1f5f9;
+}
+
 audio {
     width: 100%;
-    margin: 15px 0;
+    margin: 0;
 }
 
 .audio-title {
     color: #64748b;
-    margin: 0;
+    margin: 15px 0 0 0;
     font-size: 0.9rem;
 }
 
@@ -151,21 +187,38 @@ audio {
     padding: 20px;
     border-radius: 8px;
     border: 1px solid #334155;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.list-box:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
 }
 
 .list-box h3 {
-    margin-top: 0;
+    margin: 0 0 15px 0;
     color: #f1f5f9;
+    font-size: 1.1rem;
 }
 
 .list-box ul {
     padding-left: 20px;
     margin: 0;
+    list-style-type: none;
 }
 
 .list-box li {
     margin-bottom: 8px;
     color: #cbd5e1;
+    padding-left: 10px;
+    position: relative;
+}
+
+.list-box li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #38bdf8;
 }
 
 /* СТИЛИ ДЛЯ PDF ДОКУМЕНТОВ */
@@ -192,6 +245,7 @@ audio {
 
 .doc-icon {
     font-size: 2.2rem;
+    flex-shrink: 0;
 }
 
 .doc-info h3 {
@@ -207,13 +261,14 @@ audio {
 
 .btn-download {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 8px 16px;
     background: #38bdf8;
     color: #0f172a;
     text-decoration: none;
     border-radius: 6px;
     font-size: 0.85rem;
     font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 .btn-download:hover {
@@ -224,24 +279,75 @@ audio {
 footer {
     background-color: #1e293b;
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
     color: #64748b;
     border-top: 1px solid #334155;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0 0 15px 0;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .social-icon {
     color: #38bdf8;
     text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: #0ea5e9;
 }
 
 /* АНИМАЦИИ ДЛЯ JAVASCRIPT */
 .hidden {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .show {
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .about-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .media-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lists-container {
+        grid-template-columns: 1fr;
+    }
 }
