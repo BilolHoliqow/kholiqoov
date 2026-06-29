@@ -316,3 +316,52 @@ footer {
 .btn-download:hover {
     background: #0051b3;
 }
+/* Hero Section */
+#hero {
+    height: 100vh;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1b2230, #0f1320);
+}
+
+.hero-background {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 245, 255, 0.08) 0%, transparent 70%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.big-title {
+    font-size: 6.5rem;
+    font-weight: 900;
+    margin: 0 0 20px 0;
+    background: linear-gradient(90deg, #00f5ff, #60a5fa, #ff00aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(0, 245, 255, 0.5);
+    letter-spacing: -2px;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .big-title {
+        font-size: 4.5rem;
+    }
+}
