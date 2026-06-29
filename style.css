@@ -8,6 +8,19 @@ body {
     padding: 0;
 }
 
+
+/* Анимации для JavaScript */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px); /* Смещаем вниз на 40 пикселей */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0); /* Возвращаем на место */
+}
+
 .container {
     max-width: 900px;
     margin: 0 auto;
