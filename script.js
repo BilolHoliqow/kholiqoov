@@ -7,7 +7,7 @@ document.querySelectorAll('nav a').forEach(anchor => {
         
         if (targetElement) {
             window.scrollTo({
-                top: targetElement.offsetTop - 30, // Небольшой отступ сверху
+                top: targetElement.offsetTop - 20,
                 behavior: 'smooth'
             });
         }
@@ -24,8 +24,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-// Находим все карточки и медиа, чтобы добавить к ним анимацию
-document.querySelectorAll('.card, .media-item, .list-box').forEach((element) => {
-    element.classList.add('hidden'); // Скрываем их до прокрутки
-    observer.observe(element);
+// Находим все карточки, чтобы добавить к ним анимацию выезда
+document.querySelectorAll('.card').forEach((element) => {
+    element.classList.add('hidden'); // Изначально скрываем
+    observer.observe(element); // Начинаем слежку
 });
