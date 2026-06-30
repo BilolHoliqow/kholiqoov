@@ -3,126 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный Сайт</title>
+    <title>Личный Сайт | Билол Холиков</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Фон с анимацией -->
+    <div class="bg-animation"></div>
 
     <header>
         <div class="container">
-            <h1>Портфолио</h1>
-            <p>Мысли, интересы и проекты</p>
+            <div class="header-content">
+                <h1 class="header-title">Портфолио</h1>
+                <p class="header-subtitle">Мысли, интересы и проекты</p>
+            </div>
             
-            <nav>
-                <a href="#about">Обо мне</a>
-                <a href="#articles">Об интересном</a>
-                <a href="#media">Медиа</a>
-                <a href="#lists">Мои списки</a>
+            <nav class="navbar">
+                <a href="#about" class="nav-link" data-section="about">Обо мне</a>
+                <a href="#articles" class="nav-link" data-section="articles">Об интересном</a>
+                <a href="#media" class="nav-link" data-section="media">Медиа</a>
+                <a href="#files" class="nav-link" data-section="files">Файлы</a>
+                <a href="#lists" class="nav-link" data-section="lists">Мои списки</a>
+                <div class="nav-indicator"></div>
             </nav>
         </div>
     </header>
 
     <main class="container">
 
-        <section id="about" class="card">
-            <h2>I'm Bilol</h2>
+        <section id="about" class="card section-card">
+            <div class="card-header">
+                <h2 class="section-title">I'm Bilol</h2>
+                <div class="title-line"></div>
+            </div>
             <div class="about-content">
-                <img src="avatar.jpg" alt="Моё фото" class="profile-img">
-                <div>
-                    <p>
-                        Ученик 11 класса. 
-                        Создал сайт как своё портфолио. 
+                <div class="profile-wrapper">
+                    <img src="avatar.jpg" alt="Моё фото" class="profile-img">
+                    <div class="profile-glow"></div>
+                </div>
+                <div class="about-text">
+                    <p class="about-description">
+                        Ученик 11 класса. Создал сайт как своё портфолио. 
+                        <span class="highlight">Увлекаюсь веб-разработкой и конкурсным программированием.</span>
                         Буду постепенно улучшать сайт и выложить свои проекты.
                     </p>
+                    <div class="skills-preview">
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">Web Design</span>
+                        <span class="skill-tag">Math</span>
+                        <span class="skill-tag">Study</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="articles">
-            <h2>Об интересном</h2>
+        <section id="articles" class="section-card">
+            <div class="card-header">
+                <h2 class="section-title">Об интересном</h2>
+                <div class="title-line"></div>
+            </div>
 
-            <article class="card">
-                <h3>О сайте</h3>
-                <p class="date">Опубликовано: 30 июня 2026</p>
-                <p>
-                    На сайте была вкладка "Файлы". Позже я доработаю её и добавлю файлы.
+            <article class="article-card">
+                <div class="article-header">
+                    <h3 class="article-title">О сайте</h3>
+                    <p class="article-date">30 июня 2026</p>
+                </div>
+                <p class="article-content">
+                    На сайте добавлена новая вкладка "Файлы" с возможностью скачивания проектов и документов. 
+                    Сайт получил полный редизайн с современными анимациями и улучшенной интерактивностью!
                 </p>
+                <div class="article-tags">
+                    <span class="article-tag">#сайт</span>
+                    <span class="article-tag">#обновление</span>
+                </div>
             </article>
 
         </section>
 
-        <section id="media" class="card">
-            <h2>Галерея и Медиа</h2>
+        <section id="media" class="card section-card">
+            <div class="card-header">
+                <h2 class="section-title">Галерея и Медиа</h2>
+                <div class="title-line"></div>
+            </div>
             
             <div class="media-grid">
-                <div class="media-item">
-                    <img src="photo1.jpg" alt="Описание фото 1">
-                    <div class="tags">
-                        <span class="tag">#фото</span>
+                <div class="media-item media-photo">
+                    <div class="media-image-wrapper">
+                        <img src="photo1.jpg" alt="Описание фото 1">
+                        <div class="media-overlay">
+                            <span class="overlay-icon">🔍</span>
+                        </div>
                     </div>
-                    <p class="media-desc">Manga.</p>
+                    <div class="media-info">
+                        <div class="media-tags">
+                            <span class="tag">#фото</span>
+                        </div>
+                        <p class="media-desc">Красивое фото</p>
+                    </div>
                 </div>
 
-                <div class="media-item">
-                    <img src="photo2.jpg" alt="Описание фото 2">
-                    <div class="tags">
-                        <span class="tag">#фото</span>
+                <div class="media-item media-photo">
+                    <div class="media-image-wrapper">
+                        <img src="photo2.jpg" alt="Описание фото 2">
+                        <div class="media-overlay">
+                            <span class="overlay-icon">🔍</span>
+                        </div>
                     </div>
-                    <p class="media-desc">Art.</p>
+                    <div class="media-info">
+                        <div class="media-tags">
+                            <span class="tag">#фото</span>
+                        </div>
+                        <p class="media-desc">Красивое фото</p>
+                    </div>
                 </div>
 
-                <div class="media-item">
-                    <video controls>
-                        <source src="video.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                    <div class="tags">
-                        <span class="tag">#видео</span>
+                <div class="media-item media-video">
+                    <div class="media-image-wrapper">
+                        <video>
+                            <source src="video.mp4" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                        <div class="media-overlay">
+                            <span class="overlay-icon">▶</span>
+                        </div>
                     </div>
-                    <p class="media-desc">Just fun</p>
+                    <div class="media-info">
+                        <div class="media-tags">
+                            <span class="tag">#видео</span>
+                        </div>
+                        <p class="media-desc">Интересное видео</p>
+                    </div>
                 </div>
             </div>
 
             <div class="audio-section">
-                <h3>Трек сейчас:</h3>
-                <audio controls>
-                    <source src="music.mp3" type="audio/mpeg">
-                    Ваш браузер не поддерживает аудио.
-                </audio>
-                <p class="media-desc">The Neighbourhood - A little death</p>
+                <h3 class="audio-title">🎵 Трек сейчас:</h3>
+                <div class="audio-player">
+                    <audio controls>
+                        <source src="music.mp3" type="audio/mpeg">
+                        Ваш браузер не поддерживает аудио.
+                    </audio>
+                </div>
+                <p class="audio-track">The Neighbourhood - A little death</p>
+            </div>
+        </section>
+
+        <!-- НОВАЯ ВКЛАДКА: ФАЙЛЫ -->
+        <section id="files" class="card section-card">
+            <div class="card-header">
+                <h2 class="section-title">📥 Мои Файлы</h2>
+                <div class="title-line"></div>
+            </div>
+
+            <div class="files-grid">
+                <div class="file-card">
+                    <div class="file-icon">📄</div>
+                    <div class="file-info">
+                        <h4 class="file-name">Файл #1, пока пусто,позже что то добавлю</h4>
+                        <p class="file-desc">Описание</p>
+                        <div class="file-meta">
+                            <span class="file-size">2.5 MB</span>
+                            <span class="file-type">React + Tailwind</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn" data-file="portfolio.zip">
+                        <span class="btn-icon">⬇</span>
+                        Скачать
+                    </a>
+                </div>
+            <div class="files-grid">
+                <div class="file-card">
+                    <div class="file-icon">📄</div>
+                    <div class="file-info">
+                        <h4 class="file-name">Файл #2, пока пусто,позже что то добавлю</h4>
+                        <p class="file-desc">Описание</p>
+                        <div class="file-meta">
+                            <span class="file-size">2.5 MB</span>
+                            <span class="file-type">React + Tailwind</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn" data-file="portfolio.zip">
+                        <span class="btn-icon">⬇</span>
+                        Скачать
+                    </a>
+                </div>
+
+            <div class="files-note">
+                <p>✨ Все файлы бесплатны и доступны для скачивания.</p>
             </div>
         </section>
 
         <section id="lists" class="lists-container">
             <div class="card list-box">
-                <h3>🎬 Любимые фильмы и анимационные фильмы</h3>
-                <ul>
-                    <li>Код Гиас:Восстание Лелуша (Аниме)</li>
-                    <li>Атака Титанов (Аниме)</li>
-                    <li>Твоё имя (Аниме фильм)</li>
+                <h3 class="list-title">🎬 Любимые фильмы</h3>
+                <ul class="list-content">
+                    <li><span class="list-marker">▸</span>Код Гиас: Восстание Лелуша</li>
+                    <li><span class="list-marker">▸</span>Атака Титанов</li>
+                    <li><span class="list-marker">▸</span>Твоё имя (Аниме фильм)</li>
                 </ul>
             </div>
 
             <div class="card list-box">
-                <h3>🎵 Плейлист</h3>
-                <ul>
-                    <li>Titanium - Please Me</li>
-                    <li>The Neighbourhood - A little death</li>
-                    <li>Mattyeux, Princess Chelsea - Sometimes</li>
-                    <li>Lil Peep - nuts</li>
+                <h3 class="list-title">🎵 Мой Плейлист</h3>
+                <ul class="list-content">
+                    <li><span class="list-marker">▸</span>Titanium - Please Me</li>
+                    <li><span class="list-marker">▸</span>The Neighbourhood - A little death</li>
+                    <li><span class="list-marker">▸</span>Mattyeux, Princess Chelsea - Sometimes</li>
+                    <li><span class="list-marker">▸</span>Lil Peep - nuts</li>
                 </ul>
             </div>
 
             <div class="card list-box">
-                <h3>👨‍🏫 Лучшие учителя</h3>
-                <ul>
-                    <li>Abdul Bari (YouTube) - Алгоритмы</li>
-                    <li>Tushar Roy (YouTube) - Алгоритмы</li>
-                    <li>Gaurav Sen (YouTube) - Алгоритмы</li>
-                    <li>Борис Трушин (YouTube) - Математика</li>
-                    <li>POC English (YouTube) - Английский</li>
-                    <li>freeCodeChamp.org (YouTube) - Алгоритмы, Информационные Науки, AI/ML и тд</li>
-                    <li>3Blue1Brown (YouTube) - Математика в действии и в анимации</li>
+                <h3 class="list-title">👨‍🏫 Лучшие Учителя</h3>
+                <ul class="list-content">
+                    <li><span class="list-marker">▸</span>Abdul Bari (YouTube) - Алгоритмы</li>
+                    <li><span class="list-marker">▸</span>Tushar Roy (YouTube) - Алгоритмы</li>
+                    <li><span class="list-marker">▸</span>Gaurav Sen (YouTube) - Алгоритмы</li>
+                    <li><span class="list-marker">▸</span>POC English (YouTube) - Английский</li>
+                    <li><span class="list-marker">▸</span>freeCodeChamp.org (YouTube) - Образование</li>
+                    <li><span class="list-marker">▸</span>3Blue1Brown (YouTube) - Математика</li>
                 </ul>
             </div>
         </section>
@@ -130,28 +228,31 @@
     </main>
 
     <footer>
-        <div class="footer-quote">
-            "Одна ошибка и ты ошибся" - Джейсон Стетхэм
-        </div>
-        <div class="footer-copyright">
-            &copy; 2026 &bull; Билол Холиков
-        </div>
-        <div class="footer-socials">
-            <a href="https://t.me/kholiqoov" target="_blank" class="social-icon" title="Telegram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-            </a>
-            <a href="https://instagram.com/kholiqoov" target="_blank" class="social-icon" title="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-            </a>
+        <div class="footer-content">
+            <div class="footer-quote">
+                "Одна ошибка и ты ошибся" - Джейсон Стетхэм
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 &bull; Билол Холиков
+            </div>
+            <div class="footer-socials">
+                <a href="https://t.me/kholiqoov" target="_blank" class="social-icon telegram" title="Telegram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/kholiqoov" target="_blank" class="social-icon instagram" title="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
