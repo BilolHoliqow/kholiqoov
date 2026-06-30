@@ -371,13 +371,14 @@ header {
    =========================== */
 
 .article-card {
-    background: linear-gradient(135deg, rgba(17, 22, 34, 0.7), rgba(27, 34, 48, 0.5));
+    background: linear-gradient(135deg, rgba(17, 22, 34, 0.95), rgba(27, 34, 48, 0.85));
     padding: 20px;
-    border-radius: 12px;
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 14px;
+    border: 2px solid rgba(96, 165, 250, 0.35);
     margin-bottom: 20px;
     transition: all var(--transition-normal);
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .article-card:hover {
@@ -573,9 +574,9 @@ audio {
 }
 
 .file-card {
-    background: linear-gradient(135deg, rgba(17, 22, 34, 0.8), rgba(27, 34, 48, 0.6));
-    border: 1px solid rgba(96, 165, 250, 0.2);
-    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(17, 22, 34, 0.95), rgba(27, 34, 48, 0.85));
+    border: 2px solid rgba(96, 165, 250, 0.35);
+    border-radius: 14px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -583,6 +584,7 @@ audio {
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .file-card::before {
@@ -933,6 +935,31 @@ footer::before {
         width: 16px;
         height: 16px;
     }
+
+    /* Улучшение видимости карточек на мобильной */
+    .file-card {
+        border: 2px solid rgba(96, 165, 250, 0.4) !important;
+        background: linear-gradient(135deg, rgba(17, 22, 34, 0.95), rgba(27, 34, 48, 0.85)) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        margin-bottom: 15px;
+    }
+
+    .file-card:hover {
+        border-color: rgba(56, 189, 248, 0.6) !important;
+        transform: translateY(-4px);
+    }
+
+    .article-card {
+        border: 2px solid rgba(96, 165, 250, 0.4) !important;
+        background: linear-gradient(135deg, rgba(17, 22, 34, 0.95), rgba(27, 34, 48, 0.85)) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        margin-bottom: 15px;
+    }
+
+    .article-card:hover {
+        border-color: rgba(56, 189, 248, 0.6) !important;
+        transform: translateY(-4px);
+    }
 }
 
 @media (max-width: 480px) {
@@ -973,6 +1000,53 @@ footer::before {
 
     .file-icon {
         font-size: 2.5rem;
+    }
+
+    /* Супер видимость карточек на мобильных */
+    .file-card {
+        border: 2.5px solid rgba(96, 165, 250, 0.5) !important;
+        background: linear-gradient(135deg, rgba(17, 22, 34, 0.98), rgba(27, 34, 48, 0.9)) !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        padding: 18px;
+        margin-bottom: 18px;
+        border-radius: 16px;
+    }
+
+    .file-card:active {
+        border-color: rgba(56, 189, 248, 0.7) !important;
+        transform: scale(0.98);
+    }
+
+    .article-card {
+        border: 2.5px solid rgba(96, 165, 250, 0.5) !important;
+        background: linear-gradient(135deg, rgba(17, 22, 34, 0.98), rgba(27, 34, 48, 0.9)) !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        padding: 18px;
+        margin-bottom: 18px;
+        border-radius: 16px;
+    }
+
+    .article-card:active {
+        border-color: rgba(56, 189, 248, 0.7) !important;
+        transform: scale(0.98);
+    }
+
+    .file-name,
+    .article-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    .file-desc,
+    .article-content {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .download-btn {
+        padding: 12px 18px;
+        font-size: 1rem;
+        font-weight: 700;
     }
 }
 
