@@ -18,16 +18,19 @@ function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     const navIndicator = document.querySelector('.nav-indicator');
     
+    if (!navIndicator) return;
+
     function updateIndicator(link) {
         const { offsetLeft, offsetWidth } = link;
         navIndicator.style.left = offsetLeft + 'px';
         navIndicator.style.width = offsetWidth + 'px';
+        navIndicator.style.display = 'block';
     }
 
     // Инициализация индикатора
     const activeLink = document.querySelector('.nav-link.active') || navLinks[0];
     if (activeLink) {
-        updateIndicator(activeLink);
+        setTimeout(() => updateIndicator(activeLink), 100);
     }
 
     // Обработка кликов по навигации
@@ -57,9 +60,15 @@ function initNavigation() {
         link.addEventListener('mouseenter', () => {
             updateIndicator(link);
         });
+
+        // Восстанавливаем при mouse leave
+        link.addEventListener('mouseleave', () => {
+            const active = document.querySelector('.nav-link.active') || navLinks[0];
+            if (active) updateIndicator(active);
+        });
     });
 
-    // Обновляем активную ссылку при скролле
+    // Обновляем активную ссылку и индикатор при скролле
     window.addEventListener('scroll', () => {
         let current = '';
         const sections = document.querySelectorAll('section');
@@ -80,6 +89,12 @@ function initNavigation() {
                 updateIndicator(link);
             }
         });
+    });
+
+    // Переинициализируем при изменении размера окна
+    window.addEventListener('resize', () => {
+        const active = document.querySelector('.nav-link.active') || navLinks[0];
+        if (active) updateIndicator(active);
     });
 }
 
