@@ -232,13 +232,29 @@ function initInteractiveElements() {
     
     mediaItems.forEach(item => {
         const img = item.querySelector('img, video');
+        const mediaWrapper = item.querySelector('.media-image-wrapper');
         
-        if (img) {
-            img.addEventListener('click', () => {
-                openMediaViewer(img.src || img.querySelector('source').src);
-            });
+        if (img || mediaWrapper) {
+            const clickHandler = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const imgElement = item.querySelector('img');
+                if (imgElement) {
+                    openMediaViewer(imgElement.src);
+                }
+            };
             
-            // Добавляем курсор для указания возможности открыть
+            // Добавляем обработчик клика к медиа-элементу
+            if (mediaWrapper) {
+                mediaWrapper.addEventListener('click', clickHandler);
+                mediaWrapper.style.cursor = 'pointer';
+            } else if (img) {
+                img.addEventListener('click', clickHandler);
+                img.style.cursor = 'pointer';
+            }
+            
+            // Добавляем обработчик к элементу для мобильных
+            item.addEventListener('click', clickHandler);
             item.style.cursor = 'pointer';
         }
     });
@@ -282,15 +298,17 @@ function initParallax() {
 // ===========================
 
 function openMediaViewer(src) {
+    // Закрываем любой существующий viewer
+    const existingViewer = document.querySelector('.media-viewer');
+    if (existingViewer) {
+        existingViewer.remove();
+    }
+
     const viewer = document.createElement('div');
     viewer.className = 'media-viewer';
     
     const img = document.createElement('img');
     img.src = src;
-    img.style.maxWidth = '90%';
-    img.style.maxHeight = '90%';
-    img.style.borderRadius = '12px';
-    img.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.5)';
     
     Object.assign(viewer.style, {
         position: 'fixed',
@@ -298,14 +316,15 @@ function openMediaViewer(src) {
         left: '0',
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        backgroundColor: 'rgba(0, 0, 0, 0.95)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: '2000',
+        zIndex: '9999',
         backdropFilter: 'blur(5px)',
         animation: 'fadeIn 0.3s ease',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        padding: '20px'
     });
 
     viewer.appendChild(img);
@@ -314,7 +333,11 @@ function openMediaViewer(src) {
     // Закрытие просмотрщика
     const closeViewer = () => {
         viewer.style.animation = 'fadeOut 0.3s ease';
-        setTimeout(() => viewer.remove(), 300);
+        setTimeout(() => {
+            if (viewer.parentNode) {
+                viewer.remove();
+            }
+        }, 300);
     };
 
     viewer.addEventListener('click', closeViewer);
@@ -328,6 +351,9 @@ function openMediaViewer(src) {
     };
 
     document.addEventListener('keydown', handleEsc);
+    
+    // Предотвращаем пропагацию события
+    viewer.addEventListener('touchstart', (e) => e.stopPropagation());
 }
 
 // ===========================
