@@ -27,25 +27,19 @@ function initNavigation() {
         navIndicator.style.display = 'block';
     }
 
-    // Инициализация индикатора
     const activeLink = document.querySelector('.nav-link.active') || navLinks[0];
     if (activeLink) {
         setTimeout(() => updateIndicator(activeLink), 100);
     }
 
-    // Обработка кликов по навигации
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Удаляем активный класс со всех
             navLinks.forEach(l => l.classList.remove('active'));
-            
-            // Добавляем активный класс текущей ссылке
             link.classList.add('active');
             updateIndicator(link);
             
-            // Переходим к секции
             const sectionId = link.getAttribute('data-section');
             const section = document.getElementById(sectionId);
             
@@ -56,27 +50,19 @@ function initNavigation() {
             }
         });
 
-        // Обновляем индикатор при наведении
-        link.addEventListener('mouseenter', () => {
-            updateIndicator(link);
-        });
-
-        // Восстанавливаем при mouse leave
+        link.addEventListener('mouseenter', () => updateIndicator(link));
         link.addEventListener('mouseleave', () => {
             const active = document.querySelector('.nav-link.active') || navLinks[0];
             if (active) updateIndicator(active);
         });
     });
 
-    // Обновляем активную ссылку и индикатор при скролле
     window.addEventListener('scroll', () => {
         let current = '';
         const sections = document.querySelectorAll('section');
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
             if (pageYOffset >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
@@ -91,7 +77,6 @@ function initNavigation() {
         });
     });
 
-    // Переинициализируем при изменении размера окна
     window.addEventListener('resize', () => {
         const active = document.querySelector('.nav-link.active') || navLinks[0];
         if (active) updateIndicator(active);
@@ -111,21 +96,13 @@ function initDownloadButtons() {
             
             const fileName = btn.getAttribute('data-file');
             
-            // Создаём элемент ссылки для скачивания
-            const link = document.createElement('a');
-            link.href = `#`; // Здесь будет путь к файлу
-            link.download = fileName;
-            
-            // Анимация кнопки при скачивании
             const originalContent = btn.innerHTML;
             btn.innerHTML = '<span class="btn-icon">✓</span>Загружено!';
             btn.style.background = 'linear-gradient(135deg, #34d399, #06b6d4)';
             
-            // Имитация скачивания (в реальном приложении здесь будет скачивание)
             console.log(`Скачивание: ${fileName}`);
             showNotification(`Загружаем: ${fileName}`, 'success');
             
-            // Возвращаем оригинальное состояние кнопки
             setTimeout(() => {
                 btn.innerHTML = originalContent;
                 btn.style.background = '';
@@ -143,7 +120,6 @@ function showNotification(message, type = 'info') {
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    // Стили для уведомлений
     Object.assign(notification.style, {
         position: 'fixed',
         top: '20px',
@@ -192,7 +168,6 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
-    // Наблюдаем за всеми карточками
     document.querySelectorAll('.card, .section-card, .article-card, .file-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -200,7 +175,6 @@ function initScrollAnimations() {
         observer.observe(el);
     });
 
-    // Анимация для элементов списков
     document.querySelectorAll('.list-content li').forEach((li, index) => {
         li.style.opacity = '0';
         li.style.transform = 'translateX(-20px)';
@@ -210,11 +184,10 @@ function initScrollAnimations() {
 }
 
 // ===========================
-// ИНТЕРАКТИВНЫЕ ЭЛЕМЕНТЫ
+// ИНТЕРАКТИВНЫЕ ЭЛЕМЕНТЫ (ИСПРАВЛЕН БАГ С ВИДЕО)
 // ===========================
 
 function initInteractiveElements() {
-    // Эффект для карточек при наведении
     const cards = document.querySelectorAll('.card, .section-card');
     
     cards.forEach(card => {
@@ -227,39 +200,31 @@ function initInteractiveElements() {
         });
     });
 
-    // Интерактивность для элементов медиа
     const mediaItems = document.querySelectorAll('.media-item');
     
     mediaItems.forEach(item => {
-        const img = item.querySelector('img, video');
         const mediaWrapper = item.querySelector('.media-image-wrapper');
         
-        if (img || mediaWrapper) {
+        if (mediaWrapper) {
             const clickHandler = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                
                 const imgElement = item.querySelector('img');
+                const videoSource = item.querySelector('video source');
+                
                 if (imgElement) {
-                    openMediaViewer(imgElement.src);
+                    openMediaViewer(imgElement.src, 'image');
+                } else if (videoSource) {
+                    openMediaViewer(videoSource.src, 'video');
                 }
             };
             
-            // Добавляем обработчик клика к медиа-элементу
-            if (mediaWrapper) {
-                mediaWrapper.addEventListener('click', clickHandler);
-                mediaWrapper.style.cursor = 'pointer';
-            } else if (img) {
-                img.addEventListener('click', clickHandler);
-                img.style.cursor = 'pointer';
-            }
-            
-            // Добавляем обработчик к элементу для мобильных
-            item.addEventListener('click', clickHandler);
-            item.style.cursor = 'pointer';
+            mediaWrapper.addEventListener('click', clickHandler);
+            mediaWrapper.style.cursor = 'pointer';
         }
     });
 
-    // Интерактивность для тегов
     const tags = document.querySelectorAll('.tag, .article-tag, .file-size, .file-type');
     
     tags.forEach(tag => {
@@ -294,11 +259,10 @@ function initParallax() {
 }
 
 // ===========================
-// ПРОСМОТРЩИК МЕДИА
+// ПРОСМОТРЩИК МЕДИА (ИСПРАВЛЕН ДЛЯ ВИДЕО И АДАПТИВНОСТИ)
 // ===========================
 
-function openMediaViewer(src) {
-    // Закрываем любой существующий viewer
+function openMediaViewer(src, type = 'image') {
     const existingViewer = document.querySelector('.media-viewer');
     if (existingViewer) {
         existingViewer.remove();
@@ -307,8 +271,16 @@ function openMediaViewer(src) {
     const viewer = document.createElement('div');
     viewer.className = 'media-viewer';
     
-    const img = document.createElement('img');
-    img.src = src;
+    let mediaElement;
+    if (type === 'image') {
+        mediaElement = document.createElement('img');
+        mediaElement.src = src;
+    } else if (type === 'video') {
+        mediaElement = document.createElement('video');
+        mediaElement.src = src;
+        mediaElement.controls = true;
+        mediaElement.autoplay = true; // Видео будет сразу проигрываться
+    }
     
     Object.assign(viewer.style, {
         position: 'fixed',
@@ -323,16 +295,23 @@ function openMediaViewer(src) {
         zIndex: '9999',
         backdropFilter: 'blur(5px)',
         animation: 'fadeIn 0.3s ease',
-        cursor: 'pointer',
+        cursor: type === 'image' ? 'pointer' : 'default', // Для видео курсор обычный, чтобы кликать на паузу
         padding: '20px'
     });
 
-    viewer.appendChild(img);
+    viewer.appendChild(mediaElement);
     document.body.appendChild(viewer);
 
-    // Закрытие просмотрщика
+    // Предотвращаем закрытие вьювера при клике на само видео (на кнопки плеера)
+    if (type === 'video') {
+        mediaElement.addEventListener('click', (e) => e.stopPropagation());
+    }
+
     const closeViewer = () => {
         viewer.style.animation = 'fadeOut 0.3s ease';
+        if (type === 'video') {
+            mediaElement.pause(); // Останавливаем видео при закрытии
+        }
         setTimeout(() => {
             if (viewer.parentNode) {
                 viewer.remove();
@@ -342,7 +321,6 @@ function openMediaViewer(src) {
 
     viewer.addEventListener('click', closeViewer);
 
-    // Закрытие по ESC
     const handleEsc = (e) => {
         if (e.key === 'Escape') {
             closeViewer();
@@ -351,9 +329,9 @@ function openMediaViewer(src) {
     };
 
     document.addEventListener('keydown', handleEsc);
-    
-    // Предотвращаем пропагацию события
-    viewer.addEventListener('touchstart', (e) => e.stopPropagation());
+    viewer.addEventListener('touchstart', (e) => {
+        if (e.target === viewer) e.preventDefault(); // Запрещаем скролл под окном
+    });
 }
 
 // ===========================
@@ -365,7 +343,6 @@ function initButtonAnimations() {
     
     buttons.forEach(btn => {
         btn.addEventListener('click', function(e) {
-            // Ripple эффект
             const ripple = document.createElement('span');
             const rect = this.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
@@ -384,7 +361,6 @@ function initButtonAnimations() {
     });
 }
 
-// Инициализируем после загрузки DOM
 window.addEventListener('load', () => {
     initButtonAnimations();
 });
@@ -409,30 +385,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===========================
-// АНИМАЦИЯ ВВОДА ТЕКСТА
-// ===========================
-
-function typeEffect(element, speed = 50) {
-    const text = element.textContent;
-    element.textContent = '';
-    let i = 0;
-
-    const type = () => {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    };
-
-    type();
-}
-
-// ===========================
-// ТРИГГЕР ДЛЯ АНИМАЦИИ ЗАГОЛОВКА
-// ===========================
-
 const headerTitle = document.querySelector('.header-title');
 if (headerTitle) {
     window.addEventListener('load', () => {
@@ -440,17 +392,12 @@ if (headerTitle) {
     });
 }
 
-// ===========================
-// ОБРАБОТКА ДИНАМИЧЕСКИХ ЭЛЕМЕНТОВ
-// ===========================
-
 function observeNewElements() {
     const targetConfig = { attributes: true, childList: true, subtree: true };
     
     const callback = (mutationsList) => {
         for (const mutation of mutationsList) {
             if (mutation.type === 'childList') {
-                // Переинициализируем анимации для новых элементов
                 initScrollAnimations();
                 initInteractiveElements();
             }
@@ -463,52 +410,24 @@ function observeNewElements() {
 
 observeNewElements();
 
-// ===========================
-// ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ АНИМАЦИЙ
-// ===========================
-
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
-
     @keyframes slideOutRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(400px); opacity: 0; }
     }
-
     @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
-
     @keyframes fadeOut {
-        from {
-            opacity: 1;
-        }
-        to {
-            opacity: 0;
-        }
+        from { opacity: 1; }
+        to { opacity: 0; }
     }
-
     .ripple {
         position: absolute;
         border-radius: 50%;
@@ -517,30 +436,16 @@ style.textContent = `
         animation: rippleEffect 0.6s ease-out;
         pointer-events: none;
     }
-
     @keyframes rippleEffect {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
+        to { transform: scale(4); opacity: 0; }
     }
-
-    .media-viewer img {
+    .media-viewer img, .media-viewer video {
         animation: zoomIn 0.3s ease;
     }
-
     @keyframes zoomIn {
-        from {
-            transform: scale(0.8);
-            opacity: 0;
-        }
-        to {
-            transform: scale(1);
-            opacity: 1;
-        }
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
     }
-
-    /* Светящийся фон при наведении */
     .card:hover::after,
     .section-card:hover::after {
         content: '';
@@ -554,16 +459,10 @@ style.textContent = `
         border-radius: inherit;
     }
 `;
-
 document.head.appendChild(style);
-
-// ===========================
-// ИНИЦИАЛИЗАЦИЯ ЗАВЕРШЕНА
-// ===========================
 
 console.log('✨ Сайт загружен с интерактивными эффектами!');
 
-// Показываем приветствие
 setTimeout(() => {
     showNotification('👋 Добро пожаловать на мой сайт!', 'info');
 }, 500);
