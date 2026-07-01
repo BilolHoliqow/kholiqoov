@@ -697,3 +697,55 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
+/* =========================================================
+   ДОПОЛНИТЕЛЬНЫЕ СТИЛИ: Аниме-тянка и Кнопка "Наверх" по центру
+   ========================================================= */
+
+/* Позиционирование аниме-девушки строго в верхнем правом углу */
+.anime-sticker {
+    position: fixed;     /* Чтобы она всегда оставалась на экране при скролле */
+    top: 20px;           /* Отступ от верхнего края */
+    right: 20px;         /* Отступ от правого края (твоя зелёная зона!) */
+    width: 85px;         /* Компактный размер, чуть меньше аватарки */
+    height: auto;
+    z-index: 9999;       /* Чтобы она была поверх остальных элементов */
+    pointer-events: none; /* Чтобы она не мешала нажимать на ссылки под ней */
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6)); /* Красивая тень */
+}
+
+.anime-sticker img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Исправление кнопки "Наверх" — переносим её из угла строго в центр внизу */
+#to-top {
+    right: auto !important;   /* Отменяем старое положение справа */
+    left: 50% !important;     /* Сдвигаем на 50% слева */
+    transform: translateX(-50%) translateY(10px); /* Выравниваем идеально по центру */
+}
+
+/* Изменение анимации появления для центрированной кнопки */
+#to-top.visible {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Адаптивность для мобильных устройств (смартфонов) */
+@media (max-width: 640px) {
+    .anime-sticker {
+        width: 65px;     /* На телефонах делаем её ещё чуть меньше, чтобы не мешала */
+        top: 15px;
+        right: 15px;
+    }
+    
+    #to-top {
+        right: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(10px);
+    }
+    
+    #to-top.visible {
+        transform: translateX(-50%) translateY(0);
+    }
+}
