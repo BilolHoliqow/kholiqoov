@@ -5,20 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Билол Холиков | Портфолио (Bilol Kholikov)</title>
     <meta name="description" content="Личный сайт Билола Холикова (Bilol Kholikov). Добро пожаловать!">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <div id="scroll-progress"></div>
+
     <header>
         <div class="container">
-            <h1>Портфолио</h1>
+            <div class="header-eyebrow">portfolio.dev</div>
+            <h1>Билол Холиков</h1>
             <p>Мысли, интересы и проекты</p>
-            
+
             <nav>
-                <a href="#about">Обо мне</a>
-                <a href="#articles">Об интересном</a>
-                <a href="#media">Медиа</a>
-                <a href="#lists">Мои списки</a>
+                <a href="#about" data-ext="md"><span class="dot"></span>about.md</a>
+                <a href="#articles" data-ext="note"><span class="dot"></span>interesting.md</a>
+                <a href="#media" data-ext="media"><span class="dot"></span>media/</a>
+                <a href="#files" data-ext="files"><span class="dot"></span>files/</a>
+                <a href="#lists" data-ext="json"><span class="dot"></span>lists.json</a>
             </nav>
         </div>
     </header>
@@ -31,8 +40,8 @@
                 <img src="avatar.jpg" alt="Моё фото" class="profile-img">
                 <div>
                     <p>
-                        Ученик 11 класса. 
-                        Создал сайт как своё портфолио. 
+                        Ученик 11 класса.
+                        Создал сайт как своё портфолио.
                         Буду постепенно улучшать сайт и выложить свои проекты.
                     </p>
                 </div>
@@ -46,7 +55,8 @@
                 <h3>О сайте</h3>
                 <p class="date">Опубликовано: 30 июня 2026</p>
                 <p>
-                    На сайте была вкладка "Файлы". Позже я доработаю её и добавлю файлы.
+                    На сайте появилась вкладка "Файлы" — теперь тут можно выкладывать файлы
+                    для скачивания, с описанием и размером у каждого.
                 </p>
             </article>
 
@@ -54,29 +64,38 @@
 
         <section id="media" class="card">
             <h2>Галерея и Медиа</h2>
-            
+
             <div class="media-grid">
-                <div class="media-item">
-                    <img src="photo1.jpg" alt="Описание фото 1">
+                <div class="media-item" data-media="image">
+                    <div class="media-frame">
+                        <img src="photo1.jpg" alt="Описание фото 1" loading="lazy">
+                        <div class="expand-hint">⤢</div>
+                    </div>
                     <div class="tags">
                         <span class="tag">#фото</span>
                     </div>
                     <p class="media-desc">Manga.</p>
                 </div>
 
-                <div class="media-item">
-                    <img src="photo2.jpg" alt="Описание фото 2">
+                <div class="media-item" data-media="image">
+                    <div class="media-frame">
+                        <img src="photo2.jpg" alt="Описание фото 2" loading="lazy">
+                        <div class="expand-hint">⤢</div>
+                    </div>
                     <div class="tags">
                         <span class="tag">#фото</span>
                     </div>
                     <p class="media-desc">Manga.</p>
                 </div>
 
-                <div class="media-item">
-                    <video controls>
-                        <source src="video.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
+                <div class="media-item" data-media="video">
+                    <div class="media-frame">
+                        <video muted playsinline preload="metadata">
+                            <source src="video.mp4" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                        <div class="expand-hint">⤢</div>
+                    </div>
                     <div class="tags">
                         <span class="tag">#видео</span>
                     </div>
@@ -94,11 +113,61 @@
             </div>
         </section>
 
+        <!-- ===================== ФАЙЛЫ ===================== -->
+        <!--
+            Как добавить свой файл:
+            1. Положи сам файл в папку сайта (например, files/resume.pdf).
+            2. Скопируй один блок <div class="file-card">...</div> ниже
+               и вставь его вторым/третьим/... в .files-grid.
+            3. Поменяй:
+               - href="files/имя.pdf"      -> путь к твоему файлу
+               - .file-icon                -> короткая метка типа файла (PDF, ZIP, PNG...)
+               - .file-name                -> имя файла, которое увидят посетители
+               - .file-desc                -> описание файла
+               - .file-meta span (первый)  -> размер файла (например 4.2 МБ)
+               - .file-meta span (второй)  -> тип файла
+            Больше ничего трогать не нужно — стили и скачивание уже настроены.
+        -->
+        <section id="files" class="card">
+            <h2>Файлы</h2>
+            <p class="media-desc">Файлы, которыми я делюсь. Нажми "Скачать", чтобы сохранить себе.</p>
+
+            <div class="files-window">
+                <div class="files-titlebar">
+                    <span class="tl-dot"></span>
+                    <span class="tl-dot"></span>
+                    <span class="tl-dot"></span>
+                    <span class="path">~/portfolio/files</span>
+                </div>
+
+                <div class="files-grid">
+
+                    <!-- Пример файла №1 -->
+                    <div class="file-card">
+                        <div class="file-top">
+                            <div class="file-icon">PDF</div>
+                            <div class="file-name">primerny.pdf</div>
+                        </div>
+                        <p class="file-desc">Примерный файл, там про С++.</p>
+                        <div class="file-meta">
+                            <span>2.1 MB</span>
+                            <span>PDF</span>
+                        </div>
+                        <a href="primerny.pdf" download class="file-download">⭳ Скачать</a>
+                    </div>
+
+
+                    <!-- Скопируй этот блок, чтобы добавить ещё файл -->
+
+                </div>
+            </div>
+        </section>
+
         <section id="lists" class="lists-container">
             <div class="card list-box">
                 <h3>🎬 Любимые фильмы и анимационные фильмы</h3>
                 <ul>
-                    <li>Код Гиас:Восстание Лелуша (Аниме)</li>
+                    <li>Код Гиас: Восстание Лелуша (Аниме)</li>
                     <li>Атака Титанов (Аниме)</li>
                     <li>Твоё имя (Аниме фильм)</li>
                 </ul>
@@ -153,5 +222,18 @@
         </div>
     </footer>
 
+    <button id="to-top" title="Наверх" aria-label="Наверх">↑</button>
+
+    <!-- Лайтбокс для просмотра фото и видео на весь экран -->
+    <div id="lightbox">
+        <button class="lightbox-nav prev" aria-label="Предыдущее">‹</button>
+        <div class="lightbox-content">
+            <div class="lightbox-caption"></div>
+        </div>
+        <button class="lightbox-nav next" aria-label="Следующее">›</button>
+        <button class="lightbox-close" aria-label="Закрыть">✕</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
